@@ -4,7 +4,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as readline from 'readline';
 
-const LEARNINGS_DIR = path.join(process.env.HOME!, '.claude', 'context', 'learnings');
+const LEARNINGS_DIR = path.join(process.env.PAI_HOME!, '.claude', 'context', 'learnings');
 
 // Ensure learnings directory exists
 if (!fs.existsSync(LEARNINGS_DIR)) {

@@ -15,7 +15,7 @@ When someone asks you to do ANYTHING, your FIRST thought should be:
 
 ## Web searches
 
-Don't use fetch to research things, use `~/.claude/commands/web-research.md` instead. 
+Don't use fetch to research things, use `${PAI_HOME}/.claude/commands/web-research.md` instead. 
 
 #### 🎭 Playwright MCP Server - Browser Automation & Testing
 
@@ -438,11 +438,11 @@ Task({
 - designer: ZF6FPbjXT488VcRRnw
 - architect: muZKMsIGYtIkjiUS82
 
-## 📁 AVAILABLE COMMANDS (~/.claude/commands/)
+## 📁 AVAILABLE COMMANDS (${PAI_HOME}/.claude/commands/)
 
 **🚨 CHECK THESE FIRST - They solve specific problems completely!**
 
-`read ~/.claude/commands/`
+`read ${PAI_HOME}/.claude/commands/`
 
 Read the descriptions in each of those to understand what they're used for and when you should invoke them.
 
@@ -466,7 +466,7 @@ Examples that should trigger the command:
 
 ## 🔌 MCP SERVERS - Model Context Protocol Services
 
-## Your full list of MCP servers is in `read Users/daniel/.claude/.mcp.json`.
+## Your full list of MCP servers is in `read ${PAI_HOME}/.claude/.mcp.json`.
 
 Read the descriptions in each of those to understand what they're used for and when you should invoke them.
 

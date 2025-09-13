@@ -1,4 +1,4 @@
-# Learning: Commands in ~/.claude/commands/ needed proper markdown-first structure
+# Learning: Commands in ${PAI_HOME}/.claude/commands/ needed proper markdown-first structure
 
 **Date:** Tuesday, September 9, 2025
 
@@ -10,7 +10,7 @@
 
 ### The Problem We Encountered
 
-Commands in ~/.claude/commands/ needed proper markdown-first structure
+Commands in ${PAI_HOME}/.claude/commands/ needed proper markdown-first structure
 
 ### What We Initially Thought
 
@@ -40,7 +40,7 @@ This solution addressed the actual problem rather than what we initially thought
 
 ## 🎯 The Lesson Learned
 
-**So now we know:** Markdown command files in ~/.claude/commands/ should have a .md file for documentation and a separate .ts file for implementation - this provides clear narrative-first documentation while maintaining executable functionality
+**So now we know:** Markdown command files in ${PAI_HOME}/.claude/commands/ should have a .md file for documentation and a separate .ts file for implementation - this provides clear narrative-first documentation while maintaining executable functionality
 
 This changes how we approach similar problems in the future because we understand the underlying mechanism better.
 
@@ -52,7 +52,7 @@ This changes how we approach similar problems in the future because we understan
 
 **After:** We know markdown command files need separate .md documentation and .ts implementation files - bun can't exec...
 
-**Action:** Markdown command files in ~/.claude/commands/ should have a .md file for documentation and a separate .ts file for implementation - this provides clear narrative-first documentation while maintaining executable functionality
+**Action:** Markdown command files in ${PAI_HOME}/.claude/commands/ should have a .md file for documentation and a separate .ts file for implementation - this provides clear narrative-first documentation while maintaining executable functionality
 
 ---
 

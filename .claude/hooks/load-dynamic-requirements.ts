@@ -48,11 +48,13 @@ async function main() {
     const data: HookInput = JSON.parse(input);
     
     // Read the markdown file with instructions from commands directory
-    const mdPath = '/Users/daniel/.claude/commands/load-dynamic-requirements.md';
+    const homeDir = process.env.PAI_HOME || process.env.HOME || '~';
+    const mdPath = join(homeDir, '.claude/commands/load-dynamic-requirements.md');
     const mdContent = readFileSync(mdPath, 'utf-8');
     
     // Output the markdown content to stdout
     // This will be passed to Claude as instructions
+    console.log("\nIMPORTANT: Variable $PAI_HOME =  "+ homeDir + "\n");
     console.log(mdContent);
     
     // Also output a special marker to indicate this is a hook instruction

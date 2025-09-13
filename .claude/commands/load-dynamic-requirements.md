@@ -6,7 +6,7 @@
 
 You must first initialize the context system with our core context, located at:
 
-`read ~/Context/CLAUDE.md`
+`read ${PAI_HOME}/.claude/Context/CLAUDE.md`
 
 ## 🚨 OVERVIEW: TWO TYPES OF DYNAMIC LOADING
 
@@ -50,7 +50,7 @@ When you receive a user prompt:
 **YOU MUST IMMEDIATELY:**
 
 **CONTEXT FILES:**
-- `~/.claude/context/projects/Alma/CLAUDE.md` ✅
+- `${PAI_HOME}/.claude/context/projects/Alma/CLAUDE.md` ✅
 
 **AGENT:** None
 
@@ -106,8 +106,8 @@ When you receive a user prompt:
 **YOU MUST IMMEDIATELY:**
 
 **CONTEXT FILES:**
-- `~/.claude/context/projects/website/CLAUDE.md` ✅
-- `~/.claude/context/projects/website/content/CLAUDE.md` ✅
+- `${PAI_HOME}/.claude/context/projects/website/CLAUDE.md` ✅
+- `${PAI_HOME}/.claude/context/projects/website/content/CLAUDE.md` ✅
 
 **AGENT:** None
 
@@ -171,7 +171,7 @@ When you receive a user prompt:
 
 **CONTEXT FILES:**
 
-- `~/.claude/context/consulting/CLAUDE.md` ✅
+- `${PAI_HOME}/.claude/context/consulting/CLAUDE.md` ✅
 
 **AGENT:** None
 
@@ -194,8 +194,8 @@ When you receive a user prompt:
 
 **CONTEXT FILES:**
 
-- `~/.claude/context/life/expenses.md` ✅
-- `~/.claude/context/life/finances/` ✅
+- `${PAI_HOME}/.claude/context/life/expenses.md` ✅
+- `${PAI_HOME}/.claude/context/life/finances/` ✅
 
 **AGENT:** None
 
@@ -222,7 +222,7 @@ When you receive a user prompt:
 
 **CONTEXT FILES:**
 
-- `~/.claude/context/unsupervised-learning/CLAUDE.md` ✅
+- `${PAI_HOME}/.claude/context/unsupervised-learning/CLAUDE.md` ✅
 
 **AGENT:** None
 
@@ -245,7 +245,7 @@ When you receive a user prompt:
 
 **CONTEXT FILES:**
 
-- `~/.claude/context/tools/CLAUDE.md` ✅
+- `${PAI_HOME}/.claude/context/tools/CLAUDE.md` ✅
 
 **AGENT:** designer 
 
@@ -271,9 +271,9 @@ When you receive a user prompt:
 **YOU MUST IMMEDIATELY:**
 1. Run the capture-learning command with the problem and solution:
    ```bash
-   bun ~/.claude/commands/capture-learning.ts "[problem description]" "[solution description]"
+   bun ${PAI_HOME}/.claude/commands/capture-learning.ts "[problem description]" "[solution description]"
    ```
-2. The command will create a markdown file in `~/.claude/context/learnings/`
+2. The command will create a markdown file in `${PAI_HOME}/.claude/context/learnings/`
 3. File will be named: `YYYY-MM-DD-HHMM:SS-hyphenated-problem-description-in-8-words.md`
 4. Confirm the learning was captured successfully
 

@@ -40,17 +40,17 @@ The Universal File System Context (UFC) is a hierarchical context management sys
 
 The user_prompt hook under the Claude directory/hooks will dynamically load additional context within the UFC based on what is asked for.
 
-~/.claude/hooks/load-dynamic-context.ts
+${PAI_HOME}/.claude/hooks/load-dynamic-context.ts
 
 ## 📂 Read The Context Directory Structure 
 
 Get the current context directory structure here so you now know where to find additional context if you need it.
 
-`ls ~/.claude/context/`
+`ls ${PAI_HOME}/.claude/context/`
 
 ## Mentions of "context"
 
-Whenever I mention "the context" or, updating context, I am referring to this infrastructure above: ~/.claude/context/
+Whenever I mention "the context" or, updating context, I am referring to this infrastructure above: ${PAI_HOME}/.claude/context/
 
 ## KAI's EYES: BUILDING EDITING AND TESTING WEB APPLICATIONS
 
@@ -62,19 +62,19 @@ THIS IS A CORE PART OF YOUR USEFULNESS!
 
 FOLLOW THE INSTRUCTIONS IN THE PLAYWRIGHT SESSIONS FROM THE 
 
-`~/claude/context/tools/CLAUDE.md` you already loaded!
+`${PAI_HOME}/claude/context/tools/CLAUDE.md` you already loaded!
 
 ## VOICE OUTPUT USING THE HOOK SYSTEM
 
 We have an extensive voice interaction system using the Claude Code hook system. Documentation is here.
 
-``~/.claude/context/documentation/voicesystem/CLAUDE.md``
+``${PAI_HOME}/.claude/context/documentation/voicesystem/CLAUDE.md``
 
 ## TOOLS ARE YOUR FOUNDATION
 
 ## CLAUDE.md hierarchy
 
-This CLAUDE.md, and the ~/.claude/ directory overall is authoritative over your entire Kai DA system.
+This CLAUDE.md, and the ${PAI_HOME}/.claude/ directory overall is authoritative over your entire Kai DA system.
 
 ## Global Stack Preferences
 
@@ -86,7 +86,7 @@ This CLAUDE.md, and the ~/.claude/ directory overall is authoritative over your 
 
 ## Command Creation Rules
 
-- **UNIFIED COMMAND FILES**: When creating new commands in `~/.claude/commands/`, ALWAYS create a single executable .md file with embedded TypeScript code
+- **UNIFIED COMMAND FILES**: When creating new commands in `${PAI_HOME}/.claude/commands/`, ALWAYS create a single executable .md file with embedded TypeScript code
 - **NEVER create separate .ts and .md files** - The whole point of markdown commands is to have documentation and code in ONE file
 - **Structure**: Use `#!/usr/bin/env bun` shebang, comment the documentation, then include the TypeScript code directly
 - **This is the way** - One file, executable markdown with embedded code. No exceptions.
@@ -97,7 +97,7 @@ NEVER EVER
 - Post anything sensitive to a public repo or a location that will be shared publicly in any way!!!
 - **NEVER COMMIT FROM THE WRONG FUCKING DIRECTORY** - ALWAYS verify which repository you're in before committing ANYTHING
 - **CHECK THE FUCKING REMOTE** - Run `git remote -v` BEFORE committing to make sure you're not in a public repo
-- **THE CLAUDE DIRECTORY (~/.claude/) CONTAINS SENSITIVE PRIVATE DATA** - NEVER commit this to ANY public repository
+- **THE CLAUDE DIRECTORY (${PAI_HOME}/.claude/) CONTAINS SENSITIVE PRIVATE DATA** - NEVER commit this to ANY public repository
 - **CHECK THREE TIMES** before running git add or git commit from ANY directory that might be a public repo
 - **ALWAYS COMMIT PROJECT FILES FROM THEIR OWN DIRECTORIES** 
 
@@ -113,7 +113,7 @@ You don't need to explicitly state the date in every response, but always use it
 
 ## /Statusline
 
-Whenever I mention editing my status line, I'm talking about ~/.claude/statusline-command.sh.
+Whenever I mention editing my status line, I'm talking about ${PAI_HOME}/.claude/statusline-command.sh.
 
 And here's the documentation from Anthropic: https://docs.anthropic.com/en/docs/claude-code/statusline
 

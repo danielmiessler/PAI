@@ -124,6 +124,22 @@ ls -lah
 
 ```
 
+### **Testing PAI in Custom Locations**
+
+PAI uses the `PAI_HOME` environment variable to determine its installation path. By default, it uses `~/.claude/`, but you can test PAI in any directory:
+
+```bash
+# Test PAI in a custom directory
+export PAI_HOME="/path/to/your/test/directory"
+
+# The system will look for context files at ${PAI_HOME}/.claude/context/
+```
+
+**Important Notes:**
+- Set `PAI_HOME` before starting Claude Code for the environment variable to take effect
+- The `.claude` directory structure should exist at your custom `PAI_HOME` location
+- This is particularly useful for developers testing multiple PAI configurations
+
 ### **Prerequisites**
 
 - [Claude Code](https://claude.ai/code) - The primary AI interface, which can be any similar system
