@@ -15,7 +15,7 @@ dir_name=$(basename "$current_dir")
 # - Commands from ${PAI_HOME}/.claude/commands/
 # - MCPs from settings.json
 # - Patterns from ${PAI_HOME}/.config/fabric/patterns
-claude_dir="${PAI_HOME:-/Users/daniel}/.claude"
+claude_dir="${PAI_HOME:-~}/.claude"
 commands_count=0
 mcps_count=0
 fobs_count=0
@@ -26,21 +26,17 @@ if [ -d "$claude_dir/commands" ]; then
     commands_count=$(find "$claude_dir/commands" -maxdepth 1 -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
 fi
 
-# Count MCPs from settings.json
-if [ -f "$claude_dir/settings.json" ]; then
-    mcps_count=$(jq -r '.mcpServers | keys | length' "$claude_dir/settings.json" 2>/dev/null || echo "0")
-else
-    mcps_count="0"
-fi
+mcps_count=$(claude mcp list | grep -v 'Checking' | grep -v '^\s*$' | wc -l | tr -d ' ' 2>/dev/null || echo "0")
+
 
 # Count Services from FoundryServices directory
-services_dir="${PAI_HOME:-/Users/daniel}/Projects/FoundryServices/Services"
+services_dir="${PAI_HOME:-~}/Projects/FoundryServices/Services"
 if [ -d "$services_dir" ]; then
     fobs_count=$(find "$services_dir" -type f -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
 fi
 
 # Count Fabric patterns from ~/.config/fabric/patterns
-fabric_patterns_dir="${PAI_HOME:-/Users/daniel}/.config/fabric/patterns"
+fabric_patterns_dir="${HOME}/.config/fabric/patterns"
 if [ -d "$fabric_patterns_dir" ]; then
     fabric_count=$(find "$fabric_patterns_dir" -maxdepth 1 -type d ! -path "$fabric_patterns_dir" 2>/dev/null | wc -l | tr -d ' ')
 fi
@@ -121,32 +117,27 @@ RESET='\033[0m'                      # Reset all formatting
 
 # Get MCP names for line 2 with blue color scheme
 mcp_names_formatted=""
-if [ -f "$claude_dir/settings.json" ]; then
-    mcp_names_raw=$(jq -r '.mcpServers | keys[]' "$claude_dir/settings.json" 2>/dev/null | tr '\n' ' ')
-    # Format MCP names - line 2 blue scheme with accent colors for important ones
-    for mcp in $mcp_names_raw; do
-        case "$mcp" in
-            "daemon") formatted="${MCP_DAEMON}Daemon${RESET}" ;;             # Bright blue accent: Personal API
-            "stripe") formatted="${MCP_STRIPE}Stripe${RESET}" ;;             # Blue accent: Financial ops
-            # All other MCPs use line 2 blue
-            "httpx") formatted="${MCP_DEFAULT}HTTPx${RESET}" ;;
-            "brightdata") formatted="${MCP_DEFAULT}BrightData${RESET}" ;;
-            "naabu") formatted="${MCP_DEFAULT}Naabu${RESET}" ;;
-            "apify") formatted="${MCP_DEFAULT}Apify${RESET}" ;;
-            "content") formatted="${MCP_DEFAULT}Content${RESET}" ;;
-            "Ref") formatted="${MCP_DEFAULT}Ref${RESET}" ;;
-            "pai") formatted="${MCP_DEFAULT}Foundry${RESET}" ;;
-            "playwright") formatted="${MCP_DEFAULT}Playwright${RESET}" ;;
-            *) formatted="${MCP_DEFAULT}${mcp^}${RESET}" ;;                  # Capitalize first letter, line 2 blue
-        esac
-        
-        if [ -z "$mcp_names_formatted" ]; then
-            mcp_names_formatted="$formatted"
-        else
-            mcp_names_formatted="$mcp_names_formatted${SEPARATOR_COLOR}, ${formatted}"
-        fi
-    done
-fi
+mcp_names_raw=$(claude mcp list 2>/dev/null | grep -v "Checking" | grep -v '^\s*$' | awk -F':' '{print $1}' | awk '{print $1}')
+# Format MCP names - line 2 blue scheme with accent colors for important ones
+for mcp in $mcp_names_raw; do
+    # Capitalize first letter for all MCPs
+    first_char=$(echo "$mcp" | cut -c1 | tr '[:lower:]' '[:upper:]')
+    rest=$(echo "$mcp" | cut -c2-)
+    capitalized="${first_char}${rest}"
+
+    # Apply special colors for specific MCPs, default blue for others
+    case "$mcp" in
+        "daemon") formatted="${MCP_DAEMON}${capitalized}${RESET}" ;;     # Bright blue accent: Personal API
+        "stripe") formatted="${MCP_STRIPE}${capitalized}${RESET}" ;;     # Blue accent: Financial ops
+        *) formatted="${MCP_DEFAULT}${capitalized}${RESET}" ;;           # Standard line 2 blue for all others
+    esac
+
+    if [ -z "$mcp_names_formatted" ]; then
+        mcp_names_formatted="$formatted"
+    else
+        mcp_names_formatted="$mcp_names_formatted${SEPARATOR_COLOR}, ${formatted}"
+    fi
+done
 
 # Output the line-based color themed statusline
 # Light blue color for directory
