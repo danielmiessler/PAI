@@ -517,14 +517,10 @@ async function main() {
   // Set tab title to override "dynamic requirements" or any other previous title
   if (tabTitle) {
     try {
-      // Escape single quotes in the message to prevent shell injection
-      const escapedTitle = tabTitle.replace(/'/g, "'\\''");
-
-      // Use printf command to set the tab title - this works in Kitty
-      const { execSync } = await import('child_process');
-      execSync(`printf '\\033]0;${escapedTitle}\\007' >&2`);
-      execSync(`printf '\\033]2;${escapedTitle}\\007' >&2`);
-      execSync(`printf '\\033]30;${escapedTitle}\\007' >&2`);
+      // Use ANSI escape sequences to set the tab title - works in Kitty and other terminals
+      process.stderr.write(`\x1b]0;${tabTitle}\x07`);
+      process.stderr.write(`\x1b]2;${tabTitle}\x07`);
+      process.stderr.write(`\x1b]30;${tabTitle}\x07`);
 
       console.error(`\n🏷️ Tab title set to: "${tabTitle}"`);
     } catch (e) {
