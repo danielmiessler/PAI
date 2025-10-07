@@ -7,21 +7,21 @@ The PAI Voice System provides text-to-speech capabilities for Kai and all agents
 
 ### Core Components
 
-1. **Voice Server** (`~/.claude/voice-server/server.ts`)
+1. **Voice Server** (`${PAI_DIR}/voice-server/server.ts`)
    - Bun-based HTTP server running on port 8888
    - Uses macOS native `say` command with Premium/Enhanced voices
    - Supports both voice name and speech rate control
    - Provides notification display alongside voice output
    - Zero API costs (no cloud services required)
 
-2. **Stop Hook** (`~/.claude/hooks/stop-hook.ts`)
+2. **Stop Hook** (`${PAI_DIR}/hooks/stop-hook.ts`)
    - Triggers after every Claude Code response
    - Parses completion messages from transcripts
    - Extracts text from COMPLETED lines
    - Sends appropriate voice requests with entity-specific voices
    - Handles both Kai's direct work and agent completions
 
-3. **Agent Configurations** (`~/.claude/agents/*.md`)
+3. **Agent Configurations** (`${PAI_DIR}/agents/*.md`)
    - Each agent has a unique voice matching their personality
    - Voice names defined in agent frontmatter (`voiceId:`)
    - Voice mappings centralized in stop-hook.ts
@@ -87,7 +87,7 @@ All entities use high-quality macOS Premium or Enhanced neural voices for natura
 
 The voice system uses a centralized JSON configuration file for all voice and speed settings:
 
-**Location:** `~/.claude/voice-server/voices.json`
+**Location:** `${PAI_DIR}/voice-server/voices.json`
 
 **Structure:**
 ```json
@@ -128,7 +128,7 @@ To change speech rates, edit the `rate_multiplier` or `rate_wpm` values in voice
 
 Changes take effect immediately (no server restart required for hook-initiated voices).
 
-### Environment Variables (in ~/.env)
+### Environment Variables (in ${PAI_DIR}/.env)
 ```bash
 PORT="8888"  # Optional, defaults to 8888
 ```
@@ -194,7 +194,7 @@ Health check endpoint.
 ## Agent Voice Configuration
 
 ### Agent Frontmatter
-Each agent file (`~/.claude/agents/*.md`) includes voice configuration:
+Each agent file (`${PAI_DIR}/agents/*.md`) includes voice configuration:
 
 ```yaml
 ---
@@ -310,26 +310,26 @@ The CUSTOM COMPLETED line is used if:
 ### Voice Server Not Running
 Start the server:
 ```bash
-cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/Claude/voice-server
+cd ${PAI_DIR}/voice-server
 bun server.ts &
 ```
 
 Or restart it:
 ```bash
 lsof -ti:8888 | xargs kill -9
-cd ~/Library/Mobile\ Documents/com~apple~CloudDocs/Claude/voice-server
+cd ${PAI_DIR}/voice-server
 bun server.ts &
 ```
 
 ### Wrong Voice Playing
 1. Check stop-hook voice mappings:
    ```bash
-   grep "const VOICES" ~/.claude/hooks/stop-hook.ts
+   grep "const VOICES" ${PAI_DIR}/hooks/stop-hook.ts
    ```
 
 2. Verify agent voiceId in frontmatter:
    ```bash
-   grep "voiceId:" ~/.claude/agents/*.md
+   grep "voiceId:" ${PAI_DIR}/agents/*.md
    ```
 
 ### No COMPLETED Line in Output

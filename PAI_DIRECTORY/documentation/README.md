@@ -6,8 +6,7 @@ Welcome to the Personal AI Infrastructure (PAI) documentation. PAI is a comprehe
 
 ### Getting Started
 - [Quick Start Guide](./quick-start.md) - Get up and running in minutes
-- [Installation Guide](./installation.md) - Detailed installation instructions
-- [Configuration Guide](./configuration.md) - System configuration options
+- [Voice Setup Guide](./VOICE-SETUP-GUIDE.md) - Configure voice notifications
 
 ### Core Concepts
 - [System Architecture](./architecture.md) - Overview of PAI components
@@ -15,15 +14,14 @@ Welcome to the Personal AI Infrastructure (PAI) documentation. PAI is a comprehe
 - [Hook System](./hook-system.md) - Event-driven automation
 - [Agent System](./agent-system.md) - Specialized AI agents
 
-### Components
-- [Voice Server](../voice-server/README.md) - Voice notification system
-- [Context Management](./context-management.md) - Dynamic context loading
-- [Command System](./command-system.md) - Custom commands and scripts
+### Voice System
+- [Voice Setup Guide](./VOICE-SETUP-GUIDE.md) - Complete voice configuration tutorial
+- [Voice System Documentation](./voice-system.md) - Technical voice system reference
+- [Voice Server](../voice-server/README.md) - Voice notification server details
 
 ### Development
-- [API Reference](./api-reference.md) - HTTP APIs and interfaces
-- [Security Guide](./security.md) - Security best practices
-- [Contributing](./contributing.md) - How to contribute to PAI
+- [Contributing Guide](./contributing.md) - How to contribute to PAI
+- [Security Guidelines](../../SECURITY.md) - Security best practices
 
 ## 🚀 What is PAI?
 
@@ -51,9 +49,9 @@ PAI (Personal AI Infrastructure) is a powerful framework that enhances AI assist
 - Event-driven responses
 
 ### 3. Voice Integration
-- ElevenLabs AI voices
-- macOS fallback support
-- Multiple voice personalities
+- macOS native Premium/Enhanced voices (100% free, offline)
+- High-quality neural TTS
+- Multiple voice personalities for Kai and agents
 - Real-time notifications
 
 ### 4. Security
@@ -80,9 +78,11 @@ PAI/
 
 PAI uses environment variables for configuration:
 
-- `PAI_DIR`: PAI configuration directory
-- `ELEVENLABS_API_KEY`: API key for voice synthesis
+- `PAI_DIR`: PAI configuration directory (required)
+- `PAI_HOME`: Your home directory (optional, defaults to $HOME)
 - `PORT`: Voice server port (default: 8888)
+- `DA`: Digital Assistant name (optional, defaults to "Assistant")
+- `DA_COLOR`: Display color for your assistant (optional, defaults to "purple")
 
 ## 📖 Quick Links
 
@@ -95,10 +95,9 @@ PAI uses environment variables for configuration:
 ## System Requirements
 
 - macOS 11+ (primary support)
-- Bun runtime
+- Bun runtime (for voice server)
 - AI assistant access (Claude, GPT, Gemini, etc.)
-- Optional: ElevenLabs API key
-- Optional: SwiftBar for menu indicators
+- macOS 13+ recommended (for Premium/Enhanced voices)
 
 ## Installation
 
@@ -155,8 +154,8 @@ Common issues and solutions:
 
 | Issue | Solution |
 |-------|----------|
-| Context not loading | Check `${PAI_DIR}/context/` |
-| Voice not working | Verify ElevenLabs API key in `${PAI_DIR}/.env` |
+| Context not loading | Check `${PAI_DIR}/context/` directory exists |
+| Voice not working | Verify voice server is running and voices are downloaded |
 | Hooks not triggering | Ensure hook scripts are executable |
 | Port conflicts | Change PORT in `${PAI_DIR}/.env` |
 

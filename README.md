@@ -399,7 +399,7 @@ ${PAI_DIR}/context/
 | **🏗️ Architect** | System design | Diagrams, PRDs | Technical planning |
 
 **Enhanced with:**
-- 🎙️ ElevenLabs voice synthesis
+- 🎙️ macOS native voice synthesis (100% free, offline)
 - ⚡ Task parallelization
 - 🔌 Deep tool integration
 
@@ -462,10 +462,10 @@ ${PAI_DIR}/context/
 <td>
 
 **💬 Communication**
-- ElevenLabs TTS
-- OpenAI Voice
+- macOS native TTS
 - Discord bots
 - Email/SMS
+- Webhooks
 
 </td>
 </tr>
@@ -537,18 +537,32 @@ vim ${PAI_DIR}/.env
 #### **Step 5: Launch PAI**
 
 ```bash
-# Navigate to PAI directory
-cd ${PAI_DIR}
-
-# Optional: Set up voice notifications (macOS only)
-# Download Premium/Enhanced voices from System Settings → Voice (Live Speech)
-# Then start the voice server:
-cd voice-server && bun server.ts &
-# See documentation/VOICE-SETUP-GUIDE.md for detailed setup instructions
-
 # Open Claude Code and start using PAI!
 # Your personal AI infrastructure is ready 🚀
 ```
+
+#### **Step 6: Optional Voice Setup** (Recommended)
+
+> [!TIP]
+> **Voice System Uses macOS Native Voices (100% Free & Offline)**
+>
+> PAI uses macOS Premium/Enhanced neural voices for high-quality, natural-sounding speech. No API costs, completely private!
+
+```bash
+# 1. Download Premium/Enhanced voices
+# Go to: System Settings → Voice (Live Speech) → Manage Voices
+# Download: Jamie, Ava, Serena, Isha, Tom, Oliver (see voice guide for details)
+
+# 2. Start the voice server
+cd ${PAI_DIR}/voice-server && bun server.ts &
+
+# 3. Test it
+curl -X POST http://localhost:8888/notify \
+  -H "Content-Type: application/json" \
+  -d '{"message":"Voice system ready","voice_name":"Jamie (Premium)"}'
+```
+
+📖 **[Complete Voice Setup Guide](./PAI_DIRECTORY/documentation/VOICE-SETUP-GUIDE.md)** - Detailed instructions with screenshots
 
 ### **⚙️ Environment Variables**
 
@@ -573,15 +587,27 @@ DA_COLOR="purple"                 # Display color (purple, blue, green, cyan, et
 
 ## 📚 **Documentation**
 
+> [!NOTE]
+> **For detailed documentation, see [PAI_DIRECTORY/documentation/](./PAI_DIRECTORY/documentation/README.md)**
+>
+> The main README provides a high-level overview. For comprehensive guides, architecture details, and troubleshooting, check the full documentation in the `PAI_DIRECTORY/documentation/` folder.
+
 <div align="center">
 
 | 📖 Guide | 🎯 Purpose | ⏱️ Time |
 |----------|------------|---------|
 | [Quick Start](#-quick-start) | Get up and running | 5 min |
-| [Architecture](#-architecture) | Understand the system | 10 min |
+| [📚 Full Documentation](./PAI_DIRECTORY/documentation/README.md) | Comprehensive guides | - |
+| [Architecture](./PAI_DIRECTORY/documentation/architecture.md) | System architecture deep-dive | 15 min |
+| [Voice Setup](./PAI_DIRECTORY/documentation/VOICE-SETUP-GUIDE.md) | Complete voice configuration | 10 min |
+| [Contributing](./PAI_DIRECTORY/documentation/contributing.md) | How to contribute | 10 min |
 | [SECURITY.md](./SECURITY.md) | Security guidelines | 5 min |
-| [Voice Server](./PAI_DIRECTORY/voice-server/README.md) | Enable voice interaction | 10 min |
-| [Commands Directory](./PAI_DIRECTORY/commands/) | Browse all commands | 15 min |
+
+**📁 Additional Documentation:**
+- [UFC Context System](./PAI_DIRECTORY/documentation/ufc-context-system.md) - Context management
+- [Hook System](./PAI_DIRECTORY/documentation/hook-system.md) - Event-driven automation
+- [Agent System](./PAI_DIRECTORY/documentation/agent-system.md) - Specialized AI agents
+- [Voice System](./PAI_DIRECTORY/documentation/voice-system.md) - Voice technical reference
 
 </div>
 

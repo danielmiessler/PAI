@@ -53,11 +53,14 @@ Create `${PAI_DIR}/.env` with your settings:
 ```bash
 # Essential Configuration
 PAI_DIR=$HOME/PAI/PAI_DIRECTORY
+PAI_HOME=$HOME
 
 # Optional: Voice Server
-ELEVENLABS_API_KEY=your_api_key_here
-ELEVENLABS_VOICE_ID=jqcCZkN6Knx8BJ5TBdYR
 PORT=8888
+
+# Optional: Digital Assistant Customization
+DA="YourAssistantName"    # Defaults to "Assistant"
+DA_COLOR="purple"         # Choose: purple, blue, green, cyan, magenta, yellow, red, orange
 
 # Optional: API Keys for various services
 OPENAI_API_KEY=your_key_here
@@ -126,20 +129,24 @@ chmod +x "${PAI_DIR}/hooks/user-prompt-submit-hook"
 
 ### 3. Install Voice Server (Optional)
 
+For voice notifications, you'll need to:
+1. Download macOS Premium/Enhanced voices (System Settings → Voice)
+2. Start the voice server
+
 ```bash
 # Navigate to voice server
 cd "${PAI_DIR}/voice-server"
 
-# Install dependencies
-bun install
-
-# Run installation script
-./install.sh
+# Start the server (runs in background)
+bun server.ts &
 
 # Test voice server
 curl -X POST http://localhost:8888/notify \
-  -d '{"message": "PAI system initialized"}'
+  -H "Content-Type: application/json" \
+  -d '{"message": "PAI system initialized", "voice_name": "Jamie (Premium)"}'
 ```
+
+See [Voice Setup Guide](./VOICE-SETUP-GUIDE.md) for detailed instructions.
 
 ## Basic Usage
 
@@ -405,8 +412,10 @@ tail -f "${HOME}/Library/Logs/"*.log
 | Variable | Purpose | Default |
 |----------|---------|---------|
 | `PAI_DIR` | PAI configuration directory | `$HOME/PAI/PAI_DIRECTORY` |
-| `ELEVENLABS_API_KEY` | Voice synthesis API | None |
+| `PAI_HOME` | Your home directory | `$HOME` |
 | `PORT` | Voice server port | 8888 |
+| `DA` | Digital Assistant name | "Assistant" |
+| `DA_COLOR` | Display color | "purple" |
 | `HOOK_DEBUG` | Enable hook debugging | false |
 
 ## Getting Help

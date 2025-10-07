@@ -209,10 +209,13 @@ say -v "Oliver (Enhanced)" "I'm the Pentester agent, ready to test your security
 ### Step 1: Navigate to Voice Server Directory
 
 ```bash
-cd ~/.claude/voice-server
+cd ${PAI_DIR}/voice-server
 ```
 
-If that doesn't work (directory doesn't exist), the PAI system isn't fully installed yet. Go back to the main PAI installation guide first.
+If that doesn't work (directory doesn't exist), ensure PAI_DIR is set correctly:
+```bash
+echo $PAI_DIR  # Should show your PAI_DIRECTORY path
+```
 
 ### Step 2: Start the Voice Server
 
@@ -336,10 +339,10 @@ bun server.ts &
 **Check the configuration:**
 ```bash
 # Check which voice is mapped to which entity
-grep "const VOICES" ~/.claude/hooks/stop-hook.ts
+grep "const VOICES" ${PAI_DIR}/hooks/stop-hook.ts
 
 # Check agent configuration
-grep "voiceId:" ~/.claude/agents/*.md
+grep "voiceId:" ${PAI_DIR}/agents/*.md
 ```
 
 The voices should match the table in Part 4 above.
@@ -353,7 +356,7 @@ The voices should match the table in Part 4 above.
 You can choose any Premium or Enhanced voice! Here's how:
 
 1. Download your preferred voice from System Settings
-2. Update the voice mapping in `~/.claude/hooks/stop-hook.ts`:
+2. Update the voice mapping in `${PAI_DIR}/hooks/stop-hook.ts`:
    ```typescript
    const VOICES = {
      kai: "Jamie (Premium)",        // Change this to your preferred voice
@@ -435,7 +438,7 @@ say -v '?' | grep "Premium\|Enhanced"
 say -v "Jamie (Premium)" "test message"
 
 # Start voice server
-cd ~/.claude/voice-server && bun server.ts &
+cd ${PAI_DIR}/voice-server && bun server.ts &
 
 # Check server health
 curl http://localhost:8888/health
@@ -445,10 +448,10 @@ lsof -ti:8888 | xargs kill -9
 ```
 
 **File Locations:**
-- Voice server: `~/.claude/voice-server/server.ts`
-- Stop hook: `~/.claude/hooks/stop-hook.ts`
-- Agent configs: `~/.claude/agents/*.md`
-- Documentation: `~/.claude/documentation/voice-system.md`
+- Voice server: `${PAI_DIR}/voice-server/server.ts`
+- Stop hook: `${PAI_DIR}/hooks/stop-hook.ts`
+- Agent configs: `${PAI_DIR}/agents/*.md`
+- Documentation: `${PAI_DIR}/documentation/voice-system.md`
 
 ---
 
